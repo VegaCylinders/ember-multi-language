@@ -8,11 +8,6 @@ export default Ember.LinkComponent.extend({
 
   i18n: service(),
 
-  locales: computed(function() {
-    const config = getOwner(this).resolveRegistration('config:environment');
-    return config.locales;
-  }),
-
   qualifiedRouteName: computed('targetRouteName', '_routing.currentState', function() {
     let params = get(this, 'params').slice();
     let lastParam = params[params.length - 1];
