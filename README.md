@@ -18,12 +18,11 @@ import RouteAliasResolver from 'ember-route-alias/mixins/route-alias-resolver';
 export default Resolver.extend(RouteAliasResolver);
 ```
 
-3. Wrap all your routes in parent `app` route and initialize auto-aliasing. Example `router.js`:
+3. Wrap all your routes in parent `app` route and alias all your languages like so:
 ```
 // app/router.js
 import Ember from 'ember';
 import config from './config/environment';
-import multiLangAutoAliasing from 'ember-multi-language/utils/auto-aliasing';
 
 const Router = Ember.Router.extend({
   location: config.locationType,
@@ -35,15 +34,28 @@ Router.map(function() {
     // all your routes
   });
 
-  multiLangAutoAliasing(this);
+  this.alias('pl', '/pl', 'app');
+  this.alias('en', '/en', 'app');
+  this.alias('de', '/de', 'app');
 });
 
 export default Router;
 ```
 
-4. [Add translations](https://github.com/jamesarosen/ember-i18n/wiki/Doc:-Defining-Translations) (they define what languages are available in your app)
+4. Update your `app.js` route:
+```
+// app/routes/app.js
+import Ember from 'ember';
+import AutoLanguageSwitcher from 'ember-multi-language/mixins/lang-switcher-mixin';
 
-5. Set the default locale in config/environment.js:
+const { Route } = Ember;
+
+export default Route.extend(AutoLanguageSwitcher);
+```
+
+5. [Add translations](https://github.com/jamesarosen/ember-i18n/wiki/Doc:-Defining-Translations)
+
+6. Set the default locale in `config/environment.js`:
 ```
 ENV.i18n = {
   defaultLocale: 'zh'
