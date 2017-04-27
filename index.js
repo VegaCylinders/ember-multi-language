@@ -2,5 +2,6 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-multi-language'
+  name: 'ember-multi-language',
+  isDeveloping: true
 };

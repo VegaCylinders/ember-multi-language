@@ -1,0 +1,1 @@
+export { default } from 'ember-multi-language/components/link-to';

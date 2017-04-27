@@ -7,6 +7,13 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('app', { path: '/' }, function() {
+    this.route('beers');
+  });
+
+  this.alias('pl', '/pl', 'app');
+  this.alias('en', '/en', 'app');
+  this.alias('de', '/de', 'app');
 });
 
 export default Router;
